@@ -7,18 +7,20 @@ import javax.swing.JOptionPane;
 import character.sheet.data.Ambusher;
 import character.sheet.data.Android;
 import character.sheet.data.Atributes;
+import character.sheet.data.CharacterClass;
 import character.sheet.data.Hacker;
 import character.sheet.data.Human;
 import character.sheet.data.Medic;
 import character.sheet.data.Mercenary;
 import character.sheet.data.Player;
+import character.sheet.data.Race;
 import character.sheet.data.Replicant;
 import character.sheet.data.Sniper;
 
-public class RegistraCharacter {
+public class CharacterRegister {
 
 	@SuppressWarnings("unused")
-	public static void main(String[] args) {
+	public static void main(String[] args) throws NullPointerException{
 
 		ListaDePlayers ldp = new ListaDePlayers();
 
@@ -40,11 +42,9 @@ public class RegistraCharacter {
 			switch (sel) {
 
 			case 1:
-				Player player = new Player(null, null, null, null, null, 1, 0, null, 0, 30);
+				Player player = new Player(null, null, null, null, null, 1, 0, null, 0, 0);
 				Atributes atributes = new Atributes(0, 0, 0, 0, 0, 0);
 				ldp.registerPlayer(player);
-				player.setAtributes(atributes);
-
 				String menu2 = String.format("1 - HACKER \n2 - MEDIC\n3 - MERCENARY\n4 - SNIPER\n5 - AMBUSHER");
 				int choice2;
 				for (;;) {
@@ -78,15 +78,6 @@ public class RegistraCharacter {
 					}
 				}
 
-				// String playerName, String characterName, characterClass classe, Race race,
-				// String origin, int level,
-				// double experience, Atributes atributes, int hitPoints, int speed
-
-				// JOptionPane.showMessageDialog(null, "New Register!");
-//				 int nano = Integer.parseInt(JOptionPane.showInputDialog("Insira o seu ano de nascimento"));
-//               int nmes = Integer.parseInt(JOptionPane.showInputDialog("Insira o seu mes de nascimento"));
-//               int ndia = Integer.parseInt(JOptionPane.showInputDialog("Insira o seu dia de nascimento"));
-
 				String menu3 = String.format("1 - HUMAN\n2 - REPLICANT\n3 - ANDROID");
 				int choice3;
 				for (;;) {
@@ -94,12 +85,6 @@ public class RegistraCharacter {
 					if (choice2 == 1) {
 						Human human = new Human();
 						player.setRace(human);
-						player.getAtributes().setCha(1);
-						player.getAtributes().setDex(1);
-						player.getAtributes().setStr(1);
-						player.getAtributes().setTech(1);
-						player.getAtributes().setCon(1);
-						player.getAtributes().setIntel(1);
 
 						break;
 					}
@@ -116,14 +101,13 @@ public class RegistraCharacter {
 						JOptionPane.showMessageDialog(null, "Digite opcao valida");
 					}
 				}
-
+				player.setAtributes(atributes);
 				String playerName = JOptionPane.showInputDialog("Player name");
 				player.setPlayerName(playerName);
 				String charName = JOptionPane.showInputDialog("Character name");
 				player.setCharacterName(charName);
 				String origin = JOptionPane.showInputDialog("Origin");
 				player.setOrigin(origin);
-				// int str, int dex, int con, int intel, int tech, int cha
 				int str = Integer.parseInt(JOptionPane.showInputDialog("Strenght"));
 				atributes.setStr(str);
 				int dex = Integer.parseInt(JOptionPane.showInputDialog("Dexterity"));
@@ -138,7 +122,7 @@ public class RegistraCharacter {
 				atributes.setCha(cha);
 
 				atributes.attModifiers();
-
+				player.setSpeed();
 				break;
 			case 2:
 				JOptionPane.showMessageDialog(null, "End!");

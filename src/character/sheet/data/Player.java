@@ -91,49 +91,73 @@ public class Player {
 	}
 
 	public void setAtributes(Atributes atributes) {
+		// this.race.toString().equals("Human");
+		if (this.race.toString().equals("Human")) {
+			this.atributes = atributes;
+			int cha = this.atributes.getCha();
+			this.atributes.setCha(cha + 1);
+			int str = this.atributes.getStr();
+			this.atributes.setStr(str + 1);
+			int con = this.atributes.getCon();
+			this.atributes.setCon(con + 1);
+			int intel = this.atributes.getIntel();
+			this.atributes.setIntel(intel + 1);
+			int dex = this.atributes.getDex();
+			this.atributes.setDex(dex + 1);
+			int tech = this.atributes.getTech();
+			this.atributes.setTech(tech + 1);
+		}
+
 		this.atributes = atributes;
 	}
-	
+
 	public int getHitPoints() {
-		if(this.classe.toString().equals("Hacker")) {
+		if (this.classe.toString().equals("Hacker")) {
 			// hp base = 4
 			return this.hitPoints += this.atributes.getConModifier() + 4;
-			
-		} else
-		if(this.classe.toString().equals("Medic")) {
+
+		} else if (this.classe.toString().equals("Medic")) {
 			// hp base = 8
 			return this.hitPoints += this.atributes.getConModifier() + 8;
-		} else
-		if(this.classe.toString().equals("Ambusher")) {
+		} else if (this.classe.toString().equals("Ambusher")) {
 			// hp base = 3
 			return this.hitPoints += this.atributes.getConModifier() + 3;
-		} else
-		if(this.classe.toString().equals("Sniper")) {
+		} else if (this.classe.toString().equals("Sniper")) {
 			// hp base = 5
 			return this.hitPoints += this.atributes.getConModifier() + 5;
-		} else
-		if(this.classe.toString().equals("Mercenary")) {
+		} else if (this.classe.toString().equals("Mercenary")) {
 			// hp base = 6
 			return this.hitPoints += this.atributes.getConModifier() + 6;
 		} else
-		return 0;
+			return 0;
 	}
 
 	public int getSpeed() {
 		return speed;
 	}
 
-	public void setSpeed(int speed) {
-		this.speed = speed;
+	public void setSpeed() {
+
+		if (this.classe.toString().equals("Medic")) {
+			this.speed = 25;
+		} else 
+		if (this.classe.toString().equals("Sniper")) {
+			this.speed = 15;
+		} else {
+			this.speed = 121;
+		}
+
 	}
 
 	@Override
 	public String toString() {
 //		String playerName, String characterName, CharacterClass classe, Race race, String origin, int level,
 //		double experience, Atributes atributes, int hitPoints, int speed
-		
-		String message = String.format("Player name: %s\nCharacter name: %s\nRace: %s\nOrigin: %s\nLevel: %d\nExperience: %.1f\nHP: %d", this.playerName,
-				this.characterName, this.race.toString(), this.origin, this.level, this.experience, this.getHitPoints()) + this.atributes;
+
+		String message = String.format(
+				"Player name: %s\nCharacter name: %s\nRace: %s\nClass: %s\nOrigin: %s\nLevel: %d\nExperience: %.1f\nHP: %d\nSpeed: %d",
+				this.playerName, this.characterName, this.race.toString(), this.classe.toString(), this.origin,
+				this.level, this.experience, this.getHitPoints(), this.speed) + this.atributes;
 		JOptionPane.showMessageDialog(null, message);
 		return "Fim do programa";
 	}

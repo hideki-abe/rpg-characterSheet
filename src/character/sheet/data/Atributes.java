@@ -99,7 +99,7 @@ public class Atributes {
 	}
 
 	public void setTech(int tech) {
-		this.tech = tech;
+		this.tech += tech;
 	}
 
 	public int getTechModifier() {
